@@ -121,7 +121,23 @@
     <p>
       <strong>Nix Version:</strong> NIX_VERSION_PLACEHOLDER
     </p>
+        
+    <h2>Subscribe to Updates</h2>
+    <p>This form demonstrates how Nix-generated content can interact with Bun's API and database:</p>
     
+    <email-form></email-form>
+    
+    <div class="info-box">
+      <h3>Interaction Example:</h3>
+      <ol>
+        <li>The email form above is a Web Component defined in <code>static/js/app.js</code></li>
+        <li>Nix includes this JavaScript in the page using <code>builtins.readFile</code></li>
+        <li>When you submit an email, the component sends a POST request to <code>/api/emails</code></li>
+        <li>Bun's API handler validates the email and stores it in the SQLite database</li>
+        <li>The component shows success or error messages based on the response</li>
+      </ol>
+    </div>
+ 
     <h2>How This Architecture Works</h2>
     
     <div class="info-box">
@@ -158,50 +174,20 @@
       </ul>
     </div>
     
-    <div class="info-box">
-      <h3>Project Structure:</h3>
-      <pre>
-nix-example-website/
-├── app/
-│   ├── default.nix      # Main Nix entry point
-│   └── get.nix          # Nix router that imports static content
-├── static/              # All static content
-│   ├── html/            # HTML templates
-│   │   ├── home.html    # Home page template
-│   │   └── nix.html     # Nix info page template
-│   └── js/              # JavaScript files
-│       └── app.js       # Web components
-├── src/                 # Source code
-│   └── index.ts         # Bun server implementation
-├── flake.nix            # Nix development environment
-├── package.json         # Bun project configuration
-└── emails.sqlite        # SQLite database (created at runtime)
-      </pre>
-    </div>
-    
-    <h2>Subscribe to Updates</h2>
-    <p>This form demonstrates how Nix-generated content can interact with Bun's API and database:</p>
-    
-    <email-form></email-form>
-    
-    <div class="info-box">
-      <h3>Interaction Example:</h3>
-      <ol>
-        <li>The email form above is a Web Component defined in <code>static/js/app.js</code></li>
-        <li>Nix includes this JavaScript in the page using <code>builtins.readFile</code></li>
-        <li>When you submit an email, the component sends a POST request to <code>/api/emails</code></li>
-        <li>Bun's API handler validates the email and stores it in the SQLite database</li>
-        <li>The component shows success or error messages based on the response</li>
-      </ol>
-    </div>
-    
     <div class="footer">
       <p>Powered by Nix and Bun</p>
       <p>
-        <a href="https://github.com/yourusername/nix-example-website" target="_blank">
+        <a href="https://github.com/0xdsqr/nix-example-website" target="_blank">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="github-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
           View on GitHub
         </a>
+	    <a href="/" title="Back to Home">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="home-icon">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+    </svg>
+    Home
+  </a>
       </p>
     </div>
     
