@@ -23,5 +23,6 @@
           shellHook = ''
             echo "🟪 Bun development environment ready"
           '';
-        };        
+        };
+      });
 }
