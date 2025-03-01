@@ -1,0 +1,212 @@
+<html>
+  <head>
+    <title>Nix web server - Nix</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.5;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+      h1, h2, h3 {
+        color: #8c52ff;
+      }
+      h1 {
+        border-bottom: 2px solid #8c52ff;
+        padding-bottom: 10px;
+      }
+      p {
+        margin: 20px 0;
+      }
+      pre {
+        background-color: #f0f0f0;
+        padding: 15px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .info-box {
+        background-color: white;
+        border-left: 4px solid #8c52ff;
+        padding: 15px;
+        margin: 20px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      a {
+        color: #8c52ff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .footer {
+        margin-top: 40px;
+        font-size: 0.9em;
+        text-align: center;
+        color: #666;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+      }
+      code {
+        background-color: #f0f0f0;
+        padding: 2px 4px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+      .email-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 30px 0;
+      }
+      #email-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 400px;
+      }
+      input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #8c52ff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #7040d9;
+      }
+      .message {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+      }
+      .success {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+      }
+      .error {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+      }
+      .github-icon {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nix + Bun Architecture</h1>
+    
+    <div class="info-box">
+      <strong>Architecture Overview:</strong> This application demonstrates a hybrid architecture where Nix generates HTML content and Bun serves it, along with handling API endpoints and database operations.
+    </div>
+    
+    <h2>System Information</h2>
+    <p>
+      <strong>Nix System:</strong> NIX_SYSTEM_PLACEHOLDER
+    </p>
+    <p>
+      <strong>Nix Version:</strong> NIX_VERSION_PLACEHOLDER
+    </p>
+    
+    <h2>How This Architecture Works</h2>
+    
+    <div class="info-box">
+      <h3>Request Flow:</h3>
+      <ol>
+        <li>Your browser makes a request to the server (e.g., <code>/nix</code>)</li>
+        <li>Bun receives the request and routes it to the appropriate handler</li>
+        <li>For content pages like this one, Bun executes: <pre>nix eval --arg route "/nix" --raw -f ./app get</pre></li>
+        <li>Nix evaluates the expression in <code>app/default.nix</code>, which imports <code>app/get.nix</code></li>
+        <li>Nix reads HTML templates from <code>static/html/</code> and JS from <code>static/js/</code></li>
+        <li>Nix generates the HTML content you're viewing right now</li>
+        <li>Bun returns the generated HTML to your browser</li>
+      </ol>
+    </div>
+    
+    <div class="info-box">
+      <h3>Technology Roles:</h3>
+      <h4>Nix's Role</h4>
+      <ul>
+        <li>Generates HTML content (what you're reading now)</li>
+        <li>Imports and embeds JavaScript</li>
+        <li>Handles routing across different URL paths</li>
+        <li>Provides reproducible environment through flakes</li>
+      </ul>
+      
+      <h4>Bun's Role</h4>
+      <ul>
+        <li>Serves as the HTTP server (listening on port 3001)</li>
+        <li>Routes requests to appropriate handlers</li>
+        <li>Executes Nix expressions to get HTML content</li>
+        <li>Provides API endpoints (<code>/api/emails</code>)</li>
+        <li>Manages the SQLite database for email storage</li>
+        <li>Offers health check endpoints (<code>/health/status</code> and <code>/health/ready</code>)</li>
+      </ul>
+    </div>
+    
+    <div class="info-box">
+      <h3>Project Structure:</h3>
+      <pre>
+nix-example-website/
+├── app/
+│   ├── default.nix      # Main Nix entry point
+│   └── get.nix          # Nix router that imports static content
+├── static/              # All static content
+│   ├── html/            # HTML templates
+│   │   ├── home.html    # Home page template
+│   │   └── nix.html     # Nix info page template
+│   └── js/              # JavaScript files
+│       └── app.js       # Web components
+├── src/                 # Source code
+│   └── index.ts         # Bun server implementation
+├── flake.nix            # Nix development environment
+├── package.json         # Bun project configuration
+└── emails.sqlite        # SQLite database (created at runtime)
+      </pre>
+    </div>
+    
+    <h2>Subscribe to Updates</h2>
+    <p>This form demonstrates how Nix-generated content can interact with Bun's API and database:</p>
+    
+    <email-form></email-form>
+    
+    <div class="info-box">
+      <h3>Interaction Example:</h3>
+      <ol>
+        <li>The email form above is a Web Component defined in <code>static/js/app.js</code></li>
+        <li>Nix includes this JavaScript in the page using <code>builtins.readFile</code></li>
+        <li>When you submit an email, the component sends a POST request to <code>/api/emails</code></li>
+        <li>Bun's API handler validates the email and stores it in the SQLite database</li>
+        <li>The component shows success or error messages based on the response</li>
+      </ol>
+    </div>
+    
+    <div class="footer">
+      <p>Powered by Nix and Bun</p>
+      <p>
+        <a href="https://github.com/yourusername/nix-example-website" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="github-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          View on GitHub
+        </a>
+      </p>
+    </div>
+    
+    <script>
+      // This will be replaced with the content of app.js
+    </script>
+  </body>
+</html>

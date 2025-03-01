@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>Nix web server - Home</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        color: #8c52ff;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+      }
+      a {
+        color: #8c52ff;
+        text-decoration: none;
+        padding: 5px 10px;
+        border: 1px solid #8c52ff;
+        border-radius: 4px;
+      }
+      a:hover {
+        background-color: #8c52ff;
+        color: white;
+      }
+      .health-container {
+        margin: 30px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+      }
+      .status-row {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .indicator {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin-right: 10px;
+        background-color: #ccc;
+      }
+      .healthy {
+        background-color: #28a745;
+      }
+      .unhealthy {
+        background-color: #dc3545;
+      }
+      .footer {
+        margin-top: 40px;
+        font-size: 0.9em;
+        text-align: center;
+        color: #666;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+      }
+      .github-icon {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello from Nix + Bun!</h1>
+    <ul>
+      <li><a href="/nix">Nix Architecture Info</a></li>
+      <li><a href="/404">Test 404 Page</a></li>
+    </ul>
+    
+    <health-status></health-status>
+    
+    <div class="footer">
+      <p>Powered by Nix and Bun</p>
+      <p>
+        <a href="https://github.com/yourusername/nix-example-website" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="github-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          View on GitHub
+        </a>
+      </p>
+    </div>
+    
+    <script>
+      // This will be replaced with the content of app.js
+    </script>
+  </body>
+</html>
